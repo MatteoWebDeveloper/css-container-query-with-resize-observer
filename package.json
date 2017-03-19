@@ -1,0 +1,23 @@
+{
+  "name": "css-container-query-with-resize-observer",
+  "version": "1.0.0",
+  "description": "no build, no javascript, just HTML and CSS the power of the platform.",
+  "main": "index.js",
+  "scripts": {
+    "start": "http-server public/ -o",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MatteoWebDesigner/css-container-query-with-resize-observer.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MatteoWebDesigner/css-container-query-with-resize-observer/issues"
+  },
+  "homepage": "https://github.com/MatteoWebDesigner/css-container-query-with-resize-observer#readme",
+  "dependencies": {
+    "http-server": "^0.9.0"
+  }
+}

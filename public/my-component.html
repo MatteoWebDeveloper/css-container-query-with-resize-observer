@@ -1,0 +1,91 @@
+<script>
+	(() => {
+		let template =`
+			<style>
+				.my-component {
+					--contenair-md-px: 400;
+					--contenair-lg-px: 600;
+					
+					display: grid;
+					grid-row-gap: 10px;
+				}
+				
+				.my-component.is-container-md {
+					grid-template-columns: 1fr 1fr;
+					grid-column-gap: 10px;
+				}
+				
+				.my-component.is-container-lg {
+					grid-template-columns: 1fr 1fr 1fr;
+				}
+				
+				.panel {
+					box-sizing: border-box;
+					border-radius: 4px;
+					padding: 4px;
+					width: 100%;
+					display: block;
+					background: tomato;
+					color: white;
+					font-family: sans-serif;
+					font-size: 14px;
+				}
+				
+				.is-container-md .panel {
+					background: RoyalBlue;
+				}
+				
+				.is-container-lg .panel {
+					background: SeaGreen;
+				}
+			</style>
+			
+			<div class="my-component">
+				<div class="panel">
+					<slot name="first"></slot>
+				</div>
+				
+				<div class="panel">
+					<slot name="second"></slot>
+				</div>
+				
+				<div class="panel">
+					<slot name="third"></slot>
+				</div>
+			</div>
+		`;
+
+		customElements.define('my-component', class myElement extends HTMLElement {
+			constructor() {
+				super();
+				let shadowRoot = this.attachShadow({ mode: 'open' });
+				shadowRoot.innerHTML = template;
+								
+				this.elm = shadowRoot.querySelector('.my-component')
+				this.RexObx = null;
+				
+				this.containerMediumPx = this.getCSSCustomProperty("--contenair-md-px");
+				this.containerLargePx = this.getCSSCustomProperty("--contenair-lg-px");
+				
+				this.RexObx = new ResizeObserver(this.resizeObserverHandler.bind(this));
+				this.RexObx.observe(this.elm);
+			}
+			
+			resizeObserverHandler (entries) {
+				let entry = entries[0].contentRect;
+				
+				this.elm.classList.toggle('is-container-md', entry.width >= this.containerMediumPx);
+				this.elm.classList.toggle('is-container-lg', entry.width >= this.containerLargePx);
+			}
+			
+			getCSSCustomProperty(cssCustomProp) {
+			    let value = window
+			        .getComputedStyle(this.elm)
+			        .getPropertyValue(cssCustomProp)
+			        .trim();
+
+			    return value - 0; // coercion to number
+			}
+		});
+	})()
+</script>

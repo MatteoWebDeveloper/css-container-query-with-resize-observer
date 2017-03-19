@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>CSS Container query</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<link rel="stylesheet" href="main.css">
+	<link rel="import" href="my-component.html">
+</head>
+<body>	
+	<h1>CSS Container query</h1>
+	<p>Only work on Chrome Canary with flag "Experimental Web Platform features" on</p>
+	
+	<div class="layout">
+		<header class="layout__cell layout__cell--header">
+			<my-component>
+				<span slot="first">large content</span>
+				<span slot="second">large content</span>
+				<span slot="third">large content</span>
+			</my-component>
+		</header>
+		<main class="layout__cell layout__cell--main">
+			<my-component>
+				<span slot="first">medium content</span>
+				<span slot="second">medium content</span>
+				<span slot="third">medium content</span>
+			</my-component>
+		</main>
+		<sidebar class="layout__cell layout__cell--sidebar">
+			<my-component>
+				<span slot="first">small content</span>
+				<span slot="second">small content</span>
+				<span slot="third">small content</span>
+			</my-component>
+		</sidebar>
+	</div>
+</body>
+</html>
